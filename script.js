@@ -1,10 +1,16 @@
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-document.querySelector("h1").onmouseover = event => {
+
+let interval = null;
+
+document.querySelector("h1").onmouseover = event => {  
   let iteration = 0;
   
-  const interval = setInterval(() => {
-    event.target.innerText = event.target.innerText.split("")
-      .map((letter, index) => { 
+  clearInterval(interval);
+  
+  interval = setInterval(() => {
+    event.target.innerText = event.target.innerText
+      .split("")
+      .map((letter, index) => {
         if(index < iteration) {
           return event.target.dataset.value[index];
         }
@@ -13,9 +19,10 @@ document.querySelector("h1").onmouseover = event => {
       })
       .join("");
     
-    if(iteration >= event.target.dataset.value.lenght){
+    if(iteration >= event.target.dataset.value.length){ 
       clearInterval(interval);
     }
+    
     iteration += 1 / 3;
   }, 30);
 }
